@@ -1,0 +1,28 @@
+______________________________________________hplaptop____________________________________________
+
+upower -i $(upower -e | grep 'BAT')
+to see battery 
+
+______________________________________________fix lid_______________________________
+
+sudo nano /etc/systemd/logind.conf
+
+#HandleLidSwitch=suspend
+to 
+HandleLidSwitch=ignore
+
+#HandleLidSwitchDocked=ignore
+to
+HandleLidSwitchDocked=ignore
+
+sudo systemctl restart systemd-logind.service
+
+_______________________________________________ssh_______________________________________________________
+sudo nano /etc/ssh/sshd_config
+#PermitRootLogin prohibit-password  (change this to this v)
+PermitRootLogin yes
+reboot!!!!
+
+
+sudo nano /etc/fstab
+//192.168.0.41/NAS /data cifs username=admin,password=051900 0 0

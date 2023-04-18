@@ -1,0 +1,79 @@
+_______________Router____________
+
+enable 
+config terminal 
+
+hostname RouterB
+
+banner motd #
+(Place Banner here :) )
+#
+
+no ip domain-lookup
+line con 0
+exec-timeout 10
+password cisco
+login
+exit 
+line vty 0 15
+password cisco 
+login
+exit
+
+interface gigabitethernet0/0
+Description Connects to Router A
+no shutdown
+ip address 192.168.2.2 255.255.255.0
+
+interface gigabitethernet0/1
+Description Connects to Router B
+no shutdown
+ip address 192.168.2.1 255.255.255.0
+
+router rip 
+version 2 
+network 192.168.1.0
+network 192.168.2.0
+end
+
+copy run start
+
+reload
+show ip route
+sh run
+_________________________Banner_______________________
+
+(Website for cool banners)
+https://patorjk.com/software/taag/#p=display&f=Crazy&t=Pink
+
+
+_________________________CDP______________________________________
+
+show cdp interface | include interfaces
+show cdp 
+show cdp traffic
+show cdp neighbors
+show cdp neighbors detail 
+cdp run 
+do sh cdp 
+do sh cdp nei
+no cdp run (turn off cdp) 
+no cdp enable (on certain interface)
+
+
+________________LLDP_____________________________
+
+lldp run
+
+________________NTP______________________________
+
+show clock detail
+clock set 19:45:00 19 September 2019
+ntp master 4
+     (on switches)
+ntp server 10.22.0.1
+ntp update-calendar
+show ntp status | include Clock
+
+
+
